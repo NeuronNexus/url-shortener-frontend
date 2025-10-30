@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { shortenUrl } from '../api';
-
+const baseURL = process.env.REACT_APP_API_URL;
 const HomePage = () => {
   const [longUrl, setLongUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('');
@@ -20,7 +20,7 @@ const HomePage = () => {
     setLoading(true);
     try {
       const response = await shortenUrl(longUrl);
-      setShortUrl(`http://localhost:5000/${response.data.shortID}`);
+      setShortUrl(`${baseURL}/${response.data.shortID}`);
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to shorten URL');
     } finally {
